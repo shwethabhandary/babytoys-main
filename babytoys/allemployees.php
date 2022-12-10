@@ -26,24 +26,24 @@ if (!isset($_SESSION['loggedin'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
 
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="../css/aos.css">
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <style>
 
@@ -99,9 +99,11 @@ if (!isset($_SESSION['loggedin'])) {
               <li class="nav-item"><a href="product.php" class="nav-link">Products</a></li> 
               <li class="nav-item"><a href="news.php" class="nav-link">NewsLetter</a></li>
               <li class="nav-item"><a href="team.php" class="nav-link">Founders</a></li>
-              <li class="nav-item "><a href="employees.php" class="nav-link">Employees</a></li>
-              <li class="nav-item active"><a href="allemployees.php" class="nav-link">All Company</a></li>
-              <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out" style="color:black">Log Out</i></a></li> 
+              <li class="nav-item"><a href="allemployees.php" class="nav-link">All Company</a></li>
+              <li class="nav-item"><a href="../index.php" class="nav-link">Back to Main</a></li>
+                    <?php if($_SESSION["loggedin"]) { echo ('
+                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out">Log Out</i></a></li>
+                        ');}?>
             </ul>
 	        </ul>
 	      </div>
@@ -111,15 +113,15 @@ if (!isset($_SESSION['loggedin'])) {
     <section class="ftco-section">
       <div id="download">
         <table>
-            <tr>
+            <tr >
 
-                <th colspan="5">
+                <th colspan="5" style="border-right: 0px">
                   <h2 style="color:black;"> 
                     <center>All Company Employee Details </center>
                   </h2>
                </th>
 
-               <th colspan="1">
+               <th colspan="1" style="border-left: 0px">
                   <center>  
                     <input type="button" value="Download details" class="btn btn-primary btn-lg" 
                     onclick="printDiv()">
@@ -145,7 +147,7 @@ if (!isset($_SESSION['loggedin'])) {
                 <tr>
                     <td style="border-right: 0px" colspan="2">
                       
-                        <table style="width:100%;">
+                        <table style="width:100%; vertical-align: top;">
                         <tr>
                             <th class="bg-primary" >
                                 <center>
@@ -154,7 +156,7 @@ if (!isset($_SESSION['loggedin'])) {
                             </th>
                         </tr>
                         <?php 
-                        $users1=curlCall("https://pateldh6029.com/curlApi.php");
+                        $users1=curlCall("https://shwethasb.com/babytoys/curlApi.php");
                         foreach ($users1 as $user){ ?>
                           <tr style="width:100%;">
                             <td style="width:100%;">
@@ -176,7 +178,7 @@ if (!isset($_SESSION['loggedin'])) {
                             </th>
                         </tr>
                         <?php 
-                        $users1=curlCall("https://pateldh6029.com/curlApi.php");
+                        $users1=curlCall("https://nilays2498.com/homework6/userApi.php");
                         foreach ($users1 as $user){ ?>
                           <tr style="width:100%;">
                             <td style="width:100%;">
@@ -228,22 +230,22 @@ if (!isset($_SESSION['loggedin'])) {
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/scrollax.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.easing.1.3.js"></script>
+  <script src="../js/jquery.waypoints.min.js"></script>
+  <script src="../js/jquery.stellar.min.js"></script>
+  <script src="../js/owl.carousel.min.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/aos.js"></script>
+  <script src="../js/jquery.animateNumber.min.js"></script>
+  <script src="../js/bootstrap-datepicker.js"></script>
+  <script src="../js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/login.js"></script>
+  <script src="../js/google-map.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/login.js"></script>
   </body>
 </html>

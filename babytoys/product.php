@@ -109,24 +109,24 @@ error_reporting(0);
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
 
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="../css/aos.css">
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/style.css">
   </head>
   <body class="goto-here">
 	
@@ -144,14 +144,11 @@ error_reporting(0);
 					<li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
 					<li class="nav-item active"><a href="product.php" class="nav-link">Products</a></li> 
 					<li class="nav-item"><a href="news.php" class="nav-link">NewsLetter</a></li>
-					<li class="nav-item"><a href="team.php" class="nav-link">Founders</a></li>
+					<li class="nav-item"><a href="allemployees.php" class="nav-link">All Company</a></li>
+          <li class="nav-item"><a href="../innerIndex.php" class="nav-link">Back to Main</a></li>
                     <?php if($_SESSION["loggedin"]) { echo ('
-                        <li class="nav-item"><a href="employees.php" class="nav-link">Employees</a></li>
-                        <li class="nav-item"><a href="allemployees.php" class="nav-link">All Company</a></li>
-                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out" style="color:black">Log Out</i></a></li>
-                        ');} else {echo ('
-                            <li class="nav-item"><a href="employeelogin.php" class="nav-link">Admin</a></li>
-                    ');} ?>
+                        <li class="nav-item"><a href="../logout.php" class="nav-link"><i class="fa fa-sign-out">Log Out</i></a></li>
+                        ');}?>
 				  </ul>
 	        </ul>
 	      </div>
@@ -180,27 +177,37 @@ error_reporting(0);
     	<div class="container">
     		<div class="row">
 			<?php
-					for($i=0;$i<12;$i++){
+          $sqlproduct = "SELECT * FROM product where company='shwetha'";
+          $resultproduct = $con->query($sqlproduct);
 
-						echo "<div class='col-md-6 col-lg-3 ftco-animate' id={$arr[$i]["id"]}>
+          if (mysqli_num_rows($resultproduct) === 0) {
+
+              echo "<center><h1 class='lead'> No records found </h1></center>";
+          } else {
+
+              while ($row = $resultproduct->fetch_assoc()) {
+                  echo "
+                  <div class='col-md-6 col-lg-3 ftco-animate' id={$row['id']}>
 						<div class='product'>
-							<a href='productView.php?id={$arr[$i]["id"]}' class='img-prod'>
-								<img class='img-fluid' src={$arr[$i]["image"]}>
+							<a href='productView.php?id={$row['id']}' class='img-prod'>
+								<img class='img-fluid' src={$row['image']}>
 								<div class='overlay'></div>
 								<div class='text py-3 pb-4 px-3 text-center'>
-									<h3><a href='productView.php?id={$arr[$i]["id"]}'>{$arr[$i]["name"]}</a></h3>
+									<h3><a href='productView.php?id={$row['id']}'>{$row['name']}</a></h3>
 									<div class='d-flex'>
 										<div class='pricing'>
-											<p class='price'><span>{$arr[$i]["cost"]}</span></p>
+											<p class='price'><span>$ {$row['cost']}</span></p>
 										</div>
 									</div>
 								</div>
 							</a>
 							</div>
 						</div>";
-					}
-					
-			?>
+              }
+
+          }
+
+          ?>
     		</div>
     	</div>
     </section>
@@ -252,22 +259,23 @@ error_reporting(0);
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/scrollax.min.js"></script>
+  <<script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.easing.1.3.js"></script>
+  <script src="../js/jquery.waypoints.min.js"></script>
+  <script src="../js/jquery.stellar.min.js"></script>
+  <script src="../js/owl.carousel.min.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/aos.js"></script>
+  <script src="../js/jquery.animateNumber.min.js"></script>
+  <script src="../js/bootstrap-datepicker.js"></script>
+  <script src="../js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
+  <script src="../js/google-map.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/login.js"></script>
     
   </body>
 </html>

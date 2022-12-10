@@ -96,7 +96,7 @@ include('connection.php');
     }
       $result = mysqli_query($con,"SELECT * FROM mostvisited WHERE id={$id}");
      if(mysqli_num_rows($result) === 0){
-         $result2 = $con->query("INSERT INTO mostvisited (id,name,image,cost,count) values ({$id},'{$data['name']}','{$data['image']}','{$data['cost']}',1)");
+         $result2 = $con->query("INSERT INTO mostvisited (id,name,image,cost,count,company) values ({$id},'{$data['name']}','{$data['image']}','{$data['cost']}',1,'shwetha')");
      }
      else{
          while($row = $result -> fetch_assoc()){
@@ -118,25 +118,70 @@ include('connection.php');
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
 
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="../css/aos.css">
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="../css/ionicons.min.css">
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/review.css">
+
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+    </style>
   </head>
   <body class="goto-here">
 	
@@ -155,15 +200,11 @@ include('connection.php');
 					<li class="nav-item active"><a href="product.php" class="nav-link">Products</a></li> 
 					<li class="nav-item"><a href="news.php" class="nav-link">NewsLetter</a></li>
 					<li class="nav-item"><a href="team.php" class="nav-link">Founders</a></li>
+                    <li class="nav-item"><a href="allemployees.php" class="nav-link">All Company</a></li>
+                    <li class="nav-item"><a href="../innerIndex.php" class="nav-link">Back to Main</a></li>
                     <?php if($_SESSION["loggedin"]) { echo ('
-                        <li class="nav-item"><a href="employees.php" class="nav-link">Employees</a></li>
-                        <li class="nav-item"><a href="allemployees.php" class="nav-link">All Company</a></li>
-                        <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out" style="color:black">Log Out</i></a></li>
-                        
-                        ');} else {echo ('
-                            <li class="nav-item"><a href="employeelogin.php" class="nav-link">Admin</a></li>
-                    ');} ?>
-				  </ul>
+                        <li class="nav-item"><a href="../logout.php" class="nav-link"><i class="fa fa-sign-out">Log Out</i></a></li>
+                        ');}?>
 	        </ul>
 	      </div>
 	    </div>
@@ -171,9 +212,11 @@ include('connection.php');
     <!-- END nav -->
     <!-- END nav -->
     <?php
+        $sqlreview = "SELECT * FROM review  where prod_id=$id ";
+        $resultreview = $con->query($sqlreview);
         $cookie_name = $id;
         $cookie_val = time();
-        setcookie($cookie_name,$cookie_val,time()+60*60*24,'/');
+        setcookie($cookie_name,$cookie_val,time()+60*60*24,'.shwethasb.com');
             echo "<section class='ftco-section'>
                     <div class='container'>
                         <center><h2>{$data['name']}</h2></center><br/><br/>
@@ -201,10 +244,111 @@ include('connection.php');
                                     </div>
                             <p class='price'><span>{$data['cost']}</span></p>
                                 <p>{$data['description']}</p>
+                                <button type='button class='btn btn-info btn-lg' data-toggle='modal'  data-target='#myModal'>Review product</button>
+
+
+                            </div>
+
+
+                        </div>
+                                                
+                        <div class='modal fade' id='myModal' role='dialog'>
+                            <div class='modal-dialog'>
+                            
+                            
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                                </div>
+                                <div class='modal-body'>
+                                    <h5> Rate and Review the product </h5>
+                                    <form action='review.php' method='post'>
+                                        <input id='prod_id' type='hidden' name='prod_id' value='$id'/>
+                                        <div class='rate' style='align:left;'>
+                                            <input type='radio' id='star5' name='rate' value='5' />
+                                            <label for='star5' title='text'>5 stars</label>
+                                            <input type='radio' id='star4' name='rate' value='4' />
+                                            <label for='star4' title='text'>4 stars</label>
+                                            <input type='radio' id='star3' name='rate' value='3' />
+                                            <label for='star3' title='text'>3 stars</label>
+                                            <input type='radio' id='star2' name='rate' value='2' />
+                                            <label for='star2' title='text'>2 stars</label>
+                                            <input type='radio' id='star1' name='rate' value='1' />
+                                            <label for='star1' title='text'>1 star</label>
+                                        </div>
+                                        <textarea id='message' name='message' rows='4' cols='50'> </textarea>
+                                        <button type='submit' name='submit' class='btn btn-info btn-lg' data-toggle='modal'  data-target='#myModal'>Submit Review</button>
+
+                                    </form>
+                                </div>
+                                <div class='modal-footer'>
+                                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+                                </div>
+                            </div>
+                            
                             </div>
                         </div>
                     </div>
-                </section>" ; 
+                </section>
+                <h2><center>Reviews<center/></h2>
+                " ;
+         while ($row = $resultreview->fetch_assoc()) {
+            echo"
+            <div class='testimonial-box-container'>
+            <div class='testimonial-box'>
+                <div class='box-top'>
+                    <div class='profile'>
+                        <div class='profile-img'>
+                            <img src='https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png' />
+                        </div>
+                    </div>";
+                    if($row['rating']==5){
+                        echo"<div class='reviews'>
+                        <span class='ion-ios-star-outline checked' style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked' style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked' style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked' style='color:orange;'></span>
+                    </div>";
+                    }
+
+                    if($row['rating']==4){
+                        echo"<div class='reviews'>
+                        <span class='ion-ios-star-outline checked' style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                    </div>";
+                    }
+
+                    if($row['rating']==3){
+                        echo"<div class='reviews'>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                    </div>";
+                    }
+                    if($row['rating']==2){
+                        echo"<div class='reviews'>
+                        span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                    </div>";
+                    }
+                    if($row['rating']==1){
+                        echo"<div class='reviews'>
+                        
+                        <span class='ion-ios-star-outline checked'  style='color:orange;'></span>
+                    </div>";
+                    }
+                    
+                echo"</div>
+                <div class='client-comment'>
+                <span style='color:black;'>{$row['message']}</span><br/>
+              </div>
+            </div>
+        </div>";
+              }
+        
      ?>
          
     <footer>
@@ -222,22 +366,23 @@ include('connection.php');
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/scrollax.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.easing.1.3.js"></script>
+  <script src="../js/jquery.waypoints.min.js"></script>
+  <script src="../js/jquery.stellar.min.js"></script>
+  <script src="../js/owl.carousel.min.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/aos.js"></script>
+  <script src="../js/jquery.animateNumber.min.js"></script>
+  <script src="../js/bootstrap-datepicker.js"></script>
+  <script src="../js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
+  <script src="../js/google-map.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/login.js"></script>
     
   </body>
 </html>

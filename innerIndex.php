@@ -1,5 +1,6 @@
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
+include('connection.php');
 session_start();
 error_reporting(0);
 ?>
@@ -15,7 +16,10 @@ error_reporting(0);
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     
@@ -35,6 +39,7 @@ error_reporting(0);
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css1/style.css">
+
   </head>
   <body class="goto-here">
 	<div class="py-1 " style="background-color: white">
@@ -48,13 +53,14 @@ error_reporting(0);
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 				<ul class="navbar-nav ml-auto">
-                     
-                     <?php if($_SESSION["loggedin"]) { echo ('
+					
+					<li class="nav-item"><a href="#companies" class="nav-link">Our Companies</a></li>
+					
+               <?php if($_SESSION["loggedin"]) { echo ('
                         <li class="nav-item"><a href="logout.php" class="nav-link"><i class="fa fa-sign-out">Log Out</i></a></li>
                         ');}
                      else{
                         echo('
-                        <li class="nav-item"><a href="#companies" class="nav-link">Our Companies</a></li>
                         <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                         <li class="nav-item"><a href="#login" class="nav-link">Sign In</a></li> 
                         <li class="nav-item"><a href="#signup" class="nav-link">Sign Up</a></li>');
@@ -64,61 +70,15 @@ error_reporting(0);
 	    </div>
 	  </nav>
     <!-- END nav -->
-    <header>
-         <!-- header inner -->
-         <div  class="head_top" id="home">
-            <!-- end header inner -->
-            <!-- end header -->
-            <!-- banner -->
-            <section class="banner_main">
-               <div class="container-fluid">
-                  <div class="row d_flex">
-                     <div class="col-md-6">
-                        <div class="text-bg">
-                           <h1>Cross Webbee</h1>
-                           <p>This website is a cross commercial website for view the catalog and rating the products in categlog of 3 websites names babytoys, Nirvana and MS Tayari
-                           </p>
-                        </div>
-                     </div>
-                     <div class="col-md-6">
-                        <div id="login" class="contact">
-                           <div class="container">
-                              <div class="row">
-                                 <div class="col-md-12" style=" margin: auto;">
-                                    <div class="text-bg">
-                                       <h1 style="color:#0891f8;"><center>Sign In</center></h1>
-                                    </div>
-                                    <form class="main_form " action="login.php" method="post">
-                                       <div class="row">
-                                          <div class="col-md-12 ">
-                                             <input class="form_contril" placeholder="Email" type="email" name="username">
-                                          </div>
-                                          <div class="col-md-12">
-                                             <input class="form_contril" placeholder="Password" type="tel" name="password">
-                                          </div>
-                                          <div class="col-sm-12">
-                                             <button class="send_btn" type="submit" name="submit">Login</button>
-                                          </div>
-                                       </div>
-                                    </form>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </section>
-         </div>
-      </header>
+
 
     <div class="business" id="companies">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Children Company of Cross Webbee</h2>
-                     <p>Cross Webbee is parent company of 3 start ups babyToys, Nirvana Constructions and MS Tayari </p>
+                  <div>
+                   <h1 style="color:#0891f8;">Children Company of Cross Webbee</h1>
+                  <p>Cross Webbee is parent company of 3 start ups babyToys, Nirvana Constructions and MS Tayari </p>
                   </div>
                </div>
             </div>
@@ -132,7 +92,7 @@ error_reporting(0);
                            <div class="card-body">
                              <h2 class="card-title">BabyToys</h2>
                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                             <a href="http://shwethasb.com/babytoys/" class="btn"style="background-color:#0891f8;color:white;">Go to BabyToys</a>
+                             <a href="babytoys/index.php" class="btn"style="background-color:#0891f8;color:white;">Go to BabyToys</a>
                            </div>
                          </div>
                      </div>
@@ -163,52 +123,71 @@ error_reporting(0);
             </div>
          </div>
       </div>
-      <!-- end business -->
-     
-      <!-- contact -->
-      <div id="signup" class="contact">
+
+
+    <div class="business" >
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Don't have an Account Yet?</h2>
-                     <p>IN case you haven't signed in yet no worries, you can still be a part and view our catelog and rate them. Hurry,Sign No!!</p>
-                  </div>
-               </div>
-               <div class="col-md-8" style=" margin: auto;">
-                  <form class="main_form " action="signup.php" method="post">
-                     <div class="row">
-                        <div class="text-bg">
-                           <h1 style="color:#0891f8;"><center>Sign Up</center></h1>
-                        </div>
-                        <div class="col-md-12 ">
-                           <input class="form_contril" placeholder="Email" type="email" name="email">
-                        </div>
-                        <div class="col-md-12">
-                           <input class="form_contril" placeholder="Name" type="text" name="name">
-                        </div>
-                        <div class="col-md-12">
-                           <input class="textarea" placeholder="Password" type="Password" name="password"></input>
-                        </div>
-                        <div class="col-sm-12">
-                           <button class="send_btn" type="submit" name="submit" >Sign up</button>
-                        </div>
-                     </div>
-                  </form>
+                     <br/><br/>
+                     <h1 style="color:#0891f8;">Top Five Most Visited Products</h1>
                </div>
             </div>
-         </div>
-      </div>
 
-	
-      <footer>
-		<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light" style="color:#0891f8;">
-			<div class="container py-4">
-				<center>Thank you for stoping by <io style="color:red;">&#10084;</io></center>
-				<center>copyrights &copy 2022 DNS</center>
-			</div>
-		</section>
-	</footer>
+            <h2 class="card-title">Cross webbee</h2>
+            <div class='row'>
+                     <?php
+                  $sqltop = "SELECT * FROM mostvisited  order by count desc LIMIT 5 ";
+                  $resultrecent = $con->query($sqltop);
+                  while ($row = $resultrecent->fetch_assoc()) {
+                     echo"
+                     <div class='col-md-4 col-lg-2 ftco-animate' id={$row['id']}>
+                              <div class='product'>
+                                 <a href='/babytoys/babytoys/productView.php?id={$row['id']}' class='img-prod'>
+                                    <img class='img-fluid' src={$row['image']}>
+                                    <div class='overlay'></div>
+                                    <div class='text py-3 pb-4 px-3 text-center'>
+                                       <h3><a href='/babytoys/babytoys/productView.php?id={$row['id']}'>{$row['name']}</a></h3>
+                                       <span>Company: {$row['company']}</span><br/>
+                                       <span>Total Views: {$row['count']}</span>
+                                    </div>
+                                 </a>
+                                 </div>
+                              </div>
+                     ";
+               }
+                  ?>
+        </div>
+
+
+        `<h2 class="card-title">BabyToys</h2>
+            <div class='row'>
+                     <?php
+                  $sqltop = "SELECT * FROM mostvisited where company='shwetha' order by count desc LIMIT 5 ";
+                  $resultrecent = $con->query($sqltop);
+                  while ($row = $resultrecent->fetch_assoc()) {
+                     echo"
+                     <div class='col-md-4 col-lg-2 ftco-animate' id={$row['id']}>
+                              <div class='product'>
+                                 <a href='/babytoys/babytoys/productView.php?id={$row['id']}' class='img-prod'>
+                                    <img class='img-fluid' src={$row['image']}>
+                                    <div class='overlay'></div>
+                                    <div class='text py-3 pb-4 px-3 text-center'>
+                                       <h3><a href='/babytoys/babytoys/productView.php?id={$row['id']}'>{$row['name']}</a></h3>
+                                       <span>Total Views: {$row['count']}</span>
+                                    </div>
+                                 </a>
+                                 </div>
+                              </div>
+                     ";
+               }
+                  ?>
+        </div>
+
+      </div>
+	</div>  
+
+   </footer>
 
     
   

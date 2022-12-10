@@ -7,11 +7,11 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
 	// Could not get the data that should have been sent.
 	exit('<script>
 	alert("Error")
-	window.location.href="employeelogin.php";</script>');
+	window.location.href="index.php";</script>');
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT email, password FROM admin WHERE email = ?')) {
+if ($stmt = $con->prepare('SELECT email, password FROM webusers WHERE email = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();
@@ -28,19 +28,19 @@ if ($stmt = $con->prepare('SELECT email, password FROM admin WHERE email = ?')) 
 			session_regenerate_id();
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['name'] = $_POST['username'];
-			header('Location: employees.php');
+			header('Location: innerIndex.php');
 		} else {
 			// Incorrect password
 			echo '<script>
 				alert("Incorrect username and/or password!")
-				window.location.href="employeelogin.php";
+				window.location.href="index.php";
 			</script>';
 		}
 	} else {
 		// Incorrect username
 		echo '<script>
 			alert("Incorrect username and/or password!")
-			window.location.href="employeelogin.php";
+			window.location.href="index.php";
 		</script>';
 	}
 	$stmt->close();

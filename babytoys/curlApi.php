@@ -6,7 +6,7 @@
     die("Connection failed: " . $con->connect_error);
     }
 
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM employee where company='shwetha'";
     $result = $con->query($sql);
 
     if ($result->num_rows > 0) 
