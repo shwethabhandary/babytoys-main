@@ -2,7 +2,7 @@
 $DATABASE_HOST = 'localhost';
 
 $DATABASE_USER = 'root';
-$DATABASE_PASS = 'mysql';
+$DATABASE_PASS = '';
 $DATABASE_NAME = 'babytoys';
 
 // $DATABASE_USER = 'shwethas_root';
