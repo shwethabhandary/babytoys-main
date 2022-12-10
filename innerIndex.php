@@ -103,7 +103,7 @@ error_reporting(0);
                            <div class="card-body">
                              <h2 class="card-title">Nirvana</h2>
                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                             <a href="https://nimish-lingesh.site/index.php" class="btn btn-primary" style="background-color:#0891f8;color:white;">Go to Nirvana</a>
+                             <a href="nirvana/index.php" class="btn btn-primary" style="background-color:#0891f8;color:white;">Go to Nirvana</a>
                            </div>
                          </div>
                      </div>
@@ -114,7 +114,7 @@ error_reporting(0);
                            <div class="card-body">
                               <h2 class="card-title">Ms Tayari</h2>
                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                             <a href="https://devanshbansal.com/" class="btn btn-primary" style="background-color:#0891f8;color:white;">Go to MSTayari</a>
+                             <a href="mstyaari/index.php" class="btn btn-primary" style="background-color:#0891f8;color:white;">Go to MSTayari</a>
                            </div>
                          </div>
                      </div>
