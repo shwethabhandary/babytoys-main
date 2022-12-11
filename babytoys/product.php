@@ -173,39 +173,66 @@ error_reporting(0);
       <center><p><a href="mostViews.php" class="btn btn-primary"> Top 5 viewed Items on the Menu</a></p></center>
     </div>
 
+    
+
+
     <section class="ftco-section">
     	<div class="container">
+        <div>
+        <form method="GET">
+          <input type="text" name="search" placeholder="Search">
+          <button name="submit-search" class="btn btn-primary" style="color:green;" type="submit">Search</button>
+        </form>
+        </div>
+
+        <br>
     		<div class="row">
 			<?php
-          $sqlproduct = "SELECT * FROM product where company='shwetha'";
-          $resultproduct = $con->query($sqlproduct);
-
-          if (mysqli_num_rows($resultproduct) === 0) {
-
-              echo "<center><h1 class='lead'> No records found </h1></center>";
-          } else {
-
-              while ($row = $resultproduct->fetch_assoc()) {
-                  echo "
-                  <div class='col-md-6 col-lg-3 ftco-animate' id={$row['id']}>
-						<div class='product'>
-							<a href='productView.php?id={$row['id']}' class='img-prod'>
-								<img class='img-fluid' src={$row['image']}>
-								<div class='overlay'></div>
-								<div class='text py-3 pb-4 px-3 text-center'>
-									<h3><a href='productView.php?id={$row['id']}'>{$row['name']}</a></h3>
-									<div class='d-flex'>
-										<div class='pricing'>
-											<p class='price'><span>$ {$row['cost']}</span></p>
-										</div>
-									</div>
-								</div>
-							</a>
-							</div>
-						</div>";
-              }
-
+        if (isset($_GET["submit-search"])){
+          if (isset($_GET['search'])) {
+            echo "<script>console.log('Inner block');</script>";
+            $q = $_GET['search'];
+            $search_query = "SELECT * FROM product WHERE name LIKE '%$q%' ";
           }
+          else{
+            $search_query = "SELECT * FROM product where company='shwetha'";
+          }
+        }
+        else{
+          echo "<script>console.log('Else block');</script>";
+          $search_query = "SELECT * FROM product where company='shwetha'";
+        }
+        echo "<script>console.log('Outer block' );</script>";
+        $resultproduct = $con->query($search_query);
+
+        if (mysqli_num_rows($resultproduct) === 0) {
+
+            echo "<center><h1 class='lead'> No records found </h1></center>";
+        } else {
+
+            while ($row = $resultproduct->fetch_assoc()) {
+                echo "
+                <div class='col-md-6 col-lg-3 ftco-animate' id={$row['id']}>
+                <div class='product'>
+                  <a href='productView.php?id={$row['id']}' class='img-prod'>
+                    <img class='img-fluid' src={$row['image']}>
+                    <div class='overlay'></div>
+                    <div class='text py-3 pb-4 px-3 text-center'>
+                      <h3><a href='productView.php?id={$row['id']}'>{$row['name']}</a></h3>
+                      <div class='d-flex'>
+                        <div class='pricing'>
+                          <p class='price'><span>$ {$row['cost']}</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  </div>
+                </div>";
+            }
+
+        }
+          
+          // changeContent();
 
           ?>
     		</div>

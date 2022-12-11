@@ -1,8 +1,8 @@
 <?php
 $DATABASE_HOST = 'localhost';
 
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
+$DATABASE_USER = 'iwzgygmy_root';
+$DATABASE_PASS = 'Mysql_php_123';
 $DATABASE_NAME = 'babytoys';
 
 // $DATABASE_USER = 'shwethas_root';
