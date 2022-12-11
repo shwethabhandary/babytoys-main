@@ -47,6 +47,10 @@ error_reporting(0);
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
 				<ul class="navbar-nav ml-auto">
+          <!-- <form action="search.php" method="get">
+            <input type="text" name="q" placeholder="Search">
+            <button type="submit">Search</button>
+          </form> -->
 					<li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="product.php" class="nav-link">Products</a></li> 

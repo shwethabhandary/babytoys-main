@@ -132,7 +132,8 @@ error_reporting(0);
                            <div class="card-body">
                              <h2 class="card-title">BabyToys</h2>
                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                             <a href="http://shwethasb.com/babytoys/" class="btn"style="background-color:#0891f8;color:white;">Go to BabyToys</a>
+                             <!-- <a href="http://shwethasb.com/babytoys/" class="btn"style="background-color:#0891f8;color:white;">Go to BabyToys</a> -->
+                             <a href="babytoys/index.php" class="btn"style="background-color:#0891f8;color:white;">Go to BabyToys</a>
                            </div>
                          </div>
                      </div>

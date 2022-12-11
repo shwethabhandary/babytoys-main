@@ -173,8 +173,19 @@ error_reporting(0);
       <center><p><a href="mostViews.php" class="btn btn-primary"> Top 5 viewed Items on the Menu</a></p></center>
     </div>
 
+    
+
+
     <section class="ftco-section">
     	<div class="container">
+        <div>
+        <form action="search.php" method="get">
+          <input type="text" name="q" placeholder="Search">
+          <button class="btn btn-primary" style="color:green;" type="submit">Search</button>
+        </form>
+        </div>
+
+        <br>
     		<div class="row">
 			<?php
           $sqlproduct = "SELECT * FROM product where company='shwetha'";
